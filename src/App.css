@@ -1,4 +1,4 @@
-* {cursor: url(https://cur.cursors-4u.net/holidays/hol-5/hol445.ani), url(https://cur.cursors-4u.net/holidays/hol-5/hol445.gif), auto;} 
+html {cursor: url(https://cur.cursors-4u.net/holidays/hol-5/hol445.ani), auto;}
 
 .App {
   height: 100vh;
@@ -113,7 +113,7 @@
   object-fit: cover;
 }
 
-.connected-container input[type='text'] {
+.connected-container input[type="text"] {
   display: inline-block;
   color: white;
   padding: 10px;
@@ -129,4 +129,15 @@
 
 .connected-container button {
   height: 50px;
+}
+
+p {
+  color: white;
+}
+a {
+  color: white;
+}
+a.footer {
+  display: inline-block;
+  color: white;
 }

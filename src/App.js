@@ -1,37 +1,33 @@
-import { useEffect, useState } from 'react';
-import twitterLogo from './assets/twitter-logo.svg';
-import './App.css';
-import { Connection, PublicKey, clusterApiUrl} from '@solana/web3.js';
-import {
-  Program, Provider, web3
-} from '@project-serum/anchor';
-import kp from './keypair.json';
-import idl from './idl.json';
+import { useEffect, useState } from "react";
+import twitterLogo from "./assets/twitter-logo.svg";
+import "./App.css";
+import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
+import { Program, Provider, web3 } from "@project-serum/anchor";
+import kp from "./keypair.json";
+import idl from "./idl.json";
 
 // SystemProgram is a reference to the Solana runtime!
 const { SystemProgram, Keypair } = web3;
 
 // Create a keypair for the account that will hold the GIF data.
-const arr = Object.values(kp._keypair.secretKey)
-const secret = new Uint8Array(arr)
-const baseAccount = web3.Keypair.fromSecretKey(secret)
+const arr = Object.values(kp._keypair.secretKey);
+const secret = new Uint8Array(arr);
+const baseAccount = web3.Keypair.fromSecretKey(secret);
 
 // Get our program's id form the IDL file.
 const programID = new PublicKey(idl.metadata.address);
 
 // Set our network to devent.
-const network = clusterApiUrl('devnet');
+const network = clusterApiUrl("devnet");
 
 // Control's how we want to acknowledge when a trasnaction is "done".
 const opts = {
-  preflightCommitment: "processed"
-}
+  preflightCommitment: "processed",
+};
 
 // Change this up to be your Twitter if you want.
 const TWITTER_HANDLE = "_buildspace";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
-
-
 
 const App = () => {
   // useeffect ///////////////////////////////////////////
@@ -131,24 +127,24 @@ const App = () => {
   // for the submit button
   const sendGif = async () => {
     if (inputValue.length === 0) {
-      console.log("No gif link given!")
-      return
+      console.log("No gif link given!");
+      return;
     }
-    console.log('Gif link:', inputValue);
+    console.log("Gif link:", inputValue);
     try {
       const provider = getProvider();
       const program = new Program(idl, programID, provider);
-  
+
       await program.rpc.addGif(inputValue, {
         accounts: {
           baseAccount: baseAccount.publicKey,
         },
       });
-      console.log("GIF sucesfully sent to program", inputValue)
-  
+      console.log("GIF sucesfully sent to program", inputValue);
+
       await getGifList();
     } catch (error) {
-      console.log("Error sending GIF:", error)
+      console.log("Error sending GIF:", error);
     }
   };
 
@@ -157,12 +153,27 @@ const App = () => {
    * their wallet to our app yet.
    */
   const renderNotConnectedContainer = () => (
-    <button
-      className="cta-button connect-wallet-button"
-      onClick={connectWallet}
-    >
-      Connect to Wallet
-    </button>
+    <>
+      <button
+        className="cta-button connect-wallet-button"
+        onClick={connectWallet}
+      >
+        Connect to Wallet
+      </button>
+      <p>Hi there! This is a decentralised app (dapp) that retrieves a GIF based on the link provided.</p>
+      <p>This is my very first dapp and for visitors who have no idea what it is, let me try to explain. (Even though I'm really new to it too, so don't take my words at face value.)</p>
+      <p>Normal internet as we know it is known as web 2. This dapp here would be considered web 3.</p>
+      <p>Web 3 screams blockchain.</p>
+      <p>Some of Web 3's features includes privacy + reduced censorship. Read more <a href="https://ethereum.org/en/developers/docs/web2-vs-web3/" target="_blank">here.</a></p>
+      <p>Since this is hosted on blockchain, you would need a <a href="https://phantom.app/" target="_blank">phantom wallet</a> to make full use of this website.</p>
+      <p>The currency being used is Solana. I'll be honest, I've never heard of it before starting this project.</p>
+      <p>Once you connect your wallet, you'll have access to the page where you can enter the GIF link.</p>
+      <p>When you click "GET GIF", you'll have to approve the transaction with a network fee cost.</p>
+      <p>Once it's approved, you'll see the gif appear in the website.</p>
+      <p>I've done it, to save you the hassle of setting up. Image below.</p>
+      <img src="./assets/Image.JPG" alt="pokegif"/>
+
+    </>
   );
 
   const renderConnectedContainer = () => {
@@ -235,8 +246,8 @@ const App = () => {
   // whenever there is a change in walletaddress
   useEffect(() => {
     if (walletAddress) {
-      console.log('Fetching GIF list...');
-      getGifList()
+      console.log("Fetching GIF list...");
+      getGifList();
     }
   }, [walletAddress]);
 
@@ -260,6 +271,12 @@ const App = () => {
             rel="noreferrer"
           >{`built on @${TWITTER_HANDLE}`}</a>
         </div>
+          <a
+            className="footer"
+            href="https://github.com/zyteo/gif-portal-starter"
+            target="_blank"
+            rel="noreferrer"
+          >ZY signing off - ty buildspace for helping with my very first dapp!</a>
       </div>
     </div>
   );
