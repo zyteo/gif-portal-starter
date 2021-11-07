@@ -171,7 +171,7 @@ const App = () => {
       <p>When you click "GET GIF", you'll have to approve the transaction with a network fee cost.</p>
       <p>Once it's approved, you'll see the gif appear in the website.</p>
       <p>I've done it, to save you the hassle of setting up. Image below.</p>
-      <img src="./assets/Image.JPG" alt="pokegif"/>
+      <img src="https://i.imgur.com/6ZqPwof.jpg" alt="pokegif" width="700px" height="500px"/>
 
     </>
   );
@@ -262,10 +262,9 @@ const App = () => {
           {/* if walletaddress exists, show connected container */}
           {walletAddress && renderConnectedContainer()}
         </div>
-        <div className="footer-container">
+        <div >
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
           <a
-            className="footer-text"
             href={TWITTER_LINK}
             target="_blank"
             rel="noreferrer"

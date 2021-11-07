@@ -1,7 +1,9 @@
-html {cursor: url(https://cur.cursors-4u.net/holidays/hol-5/hol445.ani), auto;}
+html {
+  cursor: url(https://cur.cursors-4u.net/holidays/hol-5/hol445.ani), 
+    url(https://cur.cursors-4u.net/holidays/hol-5/hol445.gif), auto;
+}
 
 .App {
-  height: 100vh;
   background-color: #1a202c;
   overflow: scroll;
   text-align: center;
@@ -138,6 +140,5 @@ a {
   color: white;
 }
 a.footer {
-  display: inline-block;
   color: white;
 }
