@@ -20,6 +20,10 @@ const App = () => {
   // useeffect ///////////////////////////////////////////
   // for checkifwalletconnected function
   const [walletAddress, setWalletAddress] = useState(null);
+  // for input link
+  const [inputValue, setInputValue] = useState("");
+  // for the gif list
+  const [gifList, setGifList] = useState([]);
   /*
    * This function holds the logic for deciding if a Phantom Wallet is
    * connected or not
@@ -62,6 +66,21 @@ const App = () => {
     }
   };
 
+  // handle function for the input link
+  const onInputChange = (event) => {
+    const { value } = event.target;
+    setInputValue(value);
+  };
+
+  // for the submit button
+  const sendGif = async () => {
+    if (inputValue.length > 0) {
+      console.log("Gif link:", inputValue);
+    } else {
+      console.log("Empty input. Try again.");
+    }
+  };
+
   /*
    * We want to render this UI when the user hasn't connected
    * their wallet to our app yet.
@@ -77,8 +96,18 @@ const App = () => {
 
   const renderConnectedContainer = () => (
     <div className="connected-container">
+      {/* For users to enter a link and submit */}
+      <input
+        type="text"
+        placeholder="Enter gif link!"
+        value={inputValue}
+        onChange={onInputChange}
+      />
+      <button className="cta-button submit-gif-button" onClick={sendGif}>
+        Submit
+      </button>
       <div className="gif-grid">
-        {TEST_GIFS.map((gif) => (
+        {gifList.map((gif) => (
           <div className="gif-item" key={gif}>
             <img src={gif} alt={gif} />
           </div>
@@ -97,6 +126,18 @@ const App = () => {
       await checkIfWalletIsConnected();
     });
   }, []);
+
+  // whenever there is a change in walletaddress
+  useEffect(() => {
+    if (walletAddress) {
+      console.log("Fetching GIF list...");
+
+      // Call Solana program here.
+
+      // Set state
+      setGifList(TEST_GIFS);
+    }
+  }, [walletAddress]);
 
   return (
     <div className="App">
