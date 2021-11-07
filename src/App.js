@@ -9,6 +9,13 @@ import "./App.css";
 const TWITTER_HANDLE = "_buildspace";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
+const TEST_GIFS = [
+  "https://media.giphy.com/media/slVWEctHZKvWU/giphy.gif",
+  "https://media.giphy.com/media/ukpwkOzk6kafXwfwbH/giphy.gif",
+  "https://media.giphy.com/media/HtqFbL7el09oY/giphy.gif",
+  "https://media.giphy.com/media/rAm0u2k17rM3e/giphy.gif",
+];
+
 const App = () => {
   // useeffect ///////////////////////////////////////////
   // for checkifwalletconnected function
@@ -68,6 +75,18 @@ const App = () => {
     </button>
   );
 
+  const renderConnectedContainer = () => (
+    <div className="connected-container">
+      <div className="gif-grid">
+        {TEST_GIFS.map((gif) => (
+          <div className="gif-item" key={gif}>
+            <img src={gif} alt={gif} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   // useeffects///////////////////////////////////////////////////////////////
   /*
    * When our component first mounts, let's check to see if we have a connected
@@ -83,16 +102,12 @@ const App = () => {
     <div className="App">
       <div className="container">
         <div className="header-container">
-          <p className="header">🖼 GIF Portal</p>
-          <p className="sub-text">
-            View your GIF collection in the metaverse ✨
-          </p>
+          <p className="header">🖼 PokeGIF</p>
+          <p className="sub-text">PokeGIF collection in the metaverse ✨</p>
           {/* Add the condition to show this only if we don't have a wallet address */}
           {!walletAddress && renderNotConnectedContainer()}
-          {/* not sure if this is in right place */}
-          <div
-            className={walletAddress ? "authed-container" : "container"}
-          ></div>
+          {/* if walletaddress exists, show connected container */}
+          {walletAddress && renderConnectedContainer()}
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
