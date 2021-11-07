@@ -1,4 +1,2 @@
 node_modules
 .DS_STORE
-createKeyPair.js
-keypair.json

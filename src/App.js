@@ -31,12 +31,6 @@ const opts = {
 const TWITTER_HANDLE = "_buildspace";
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
-const TEST_GIFS = [
-  "https://media.giphy.com/media/slVWEctHZKvWU/giphy.gif",
-  "https://media.giphy.com/media/ukpwkOzk6kafXwfwbH/giphy.gif",
-  "https://media.giphy.com/media/HtqFbL7el09oY/giphy.gif",
-  "https://media.giphy.com/media/rAm0u2k17rM3e/giphy.gif",
-];
 
 
 const App = () => {
@@ -46,7 +40,12 @@ const App = () => {
   // for input link
   const [inputValue, setInputValue] = useState("");
   // for the gif list
-  const [gifList, setGifList] = useState([]);
+  const [gifList, setGifList] = useState([
+    "https://media.giphy.com/media/slVWEctHZKvWU/giphy.gif",
+    "https://media.giphy.com/media/ukpwkOzk6kafXwfwbH/giphy.gif",
+    "https://media.giphy.com/media/HtqFbL7el09oY/giphy.gif",
+    "https://media.giphy.com/media/rAm0u2k17rM3e/giphy.gif",
+  ]);
   /*
    * This function holds the logic for deciding if a Phantom Wallet is
    * connected or not
@@ -186,12 +185,12 @@ const App = () => {
         <div className="connected-container">
           <input
             type="text"
-            placeholder="Enter gif link!"
+            placeholder="Please enter gif link!"
             value={inputValue}
             onChange={onInputChange}
           />
           <button className="cta-button submit-gif-button" onClick={sendGif}>
-            Submit
+            GET GIF
           </button>
           <div className="gif-grid">
             {/* We use index as the key instead, also, the src is now item.gifLink */}
