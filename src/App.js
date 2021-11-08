@@ -172,6 +172,15 @@ const App = () => {
       <p>Once it's approved, you'll see the gif appear in the website.</p>
       <p>I've done it, to save you the hassle of setting up. Image below.</p>
       <img src="https://i.imgur.com/6ZqPwof.jpg" alt="pokegif" width="700px" height="500px"/>
+      <p>Added 4 gifs below so visitors without wallet can at least look at some gifs...</p>
+      <div className="gif-grid">
+            {/* We use index as the key instead, also, the src is now item.gifLink */}
+            {gifList.map((item, index) => (
+              <div className="gif-item" key={index}>
+                <img src={item.gifLink} alt="" />
+              </div>
+            ))}
+          </div>
 
     </>
   );
@@ -204,6 +213,9 @@ const App = () => {
             GET GIF
           </button>
           <div className="gif-grid">
+              <div className="gif-item" >
+                <img src="https://media.giphy.com/media/HtqFbL7el09oY/giphy.gif" alt="" />
+              </div>
             {/* We use index as the key instead, also, the src is now item.gifLink */}
             {gifList.map((item, index) => (
               <div className="gif-item" key={index}>
